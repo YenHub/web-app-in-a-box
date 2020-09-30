@@ -1,3 +1,6 @@
+/* FONTS */
+@import url('https://fonts.googleapis.com/css2?family=Rajdhani&display=swap');
+
 .App {
   text-align: center;
 }
@@ -8,8 +11,8 @@
 }
 
 @media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
+  .App-logo.spin {
+    animation: App-logo-spin infinite 7s linear;
   }
 }
 
@@ -22,6 +25,10 @@
   justify-content: center;
   font-size: calc(10px + 2vmin);
   color: white;
+}
+
+.tea-pot-font {
+    font-family: 'Rajdhani', sans-serif;
 }
 
 .App-link {

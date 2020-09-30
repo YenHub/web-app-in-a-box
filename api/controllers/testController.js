@@ -21,7 +21,7 @@ con.connect(function(err) {
 });
 
 exports.index = (req, res, next) => {
-    res.send('THE API IS NOT A TEAPOT');
+    res.send('THE API IS NOT A ☕ POT');
 };
 
 exports.testPayload = (req, res, next) => {
