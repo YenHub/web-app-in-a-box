@@ -25,8 +25,6 @@ function TestAPI() {
 
     function getClasses() {
 
-        console.log(payloadResult);
-
         return classNames('App-logo', {
             spin: payloadResult.status === 'THE API IS NOT A TEAPOT'  ? true : false,
         })
