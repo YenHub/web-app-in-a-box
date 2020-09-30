@@ -20,8 +20,6 @@ services:
      - app-network
 
  web-app:
-    depends_on:
-     - node-mysql
     container_name:        react-express-web-app
     build:
         context:           ./client
@@ -40,7 +38,7 @@ services:
 
  api-app:
     depends_on:
-     - web-app
+     - node-mysql
     container_name:        react-express-web-api
     build:
         context:           ./api
@@ -53,7 +51,6 @@ services:
     volumes:
       - ./api:/app
       - /app/node_modules
-    command:               "npm run dev"
     networks:
       - app-network
 
