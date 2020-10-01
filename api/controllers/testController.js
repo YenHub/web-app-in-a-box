@@ -12,11 +12,21 @@ exports.index = (req, res, next) => {
     DBConnector.getConnection( (err, con) => {
       if (err) (handleFailure(err));
       apiLog(`Connected to pool`);
-      con.query(`CREATE DATABASE IF NOT EXISTS newDB`, function (err, result) {
+      let sqlStatement = `CREATE DATABASE IF NOT EXISTS testDB;
+          USE testDB;
+          CREATE TABLE IF NOT EXISTS testTable(
+              ID int NOT NULL AUTO_INCREMENT,
+              HitCount int,
+              PRIMARY KEY (ID)
+          );
+          INSERT IGNORE INTO testTable SET ID = 1, HitCount = 1;
+          UPDATE testTable SET HitCount = HitCount + 1 WHERE ID = 1;
+          SELECT HitCount FROM testTable WHERE ID = 1`;
+      con.query( sqlStatement, function (err, result) {
         if (err) (handleFailure(err));
-        apiLog(`newDB EXISTS`);
-        apiLog(JSON.stringify(result));
-        res.send(success);
+        apiLog(`testDB EXISTS`);
+        apiLog(`Total Successful Test API Calls: ${result.slice(-1)[0][0].HitCount} 🎉`);
+        res.send(`${result.slice(-1)[0][0].HitCount.toString()} Successful API Calls`);
       });
       con.release();
     });
