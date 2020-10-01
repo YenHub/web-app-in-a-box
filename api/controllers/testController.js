@@ -1,27 +1,25 @@
-var mysql = require('mysql');
-require('dotenv/config'); // load everything from `.env` file into the `process.env` variable
-const { DB_PORT, DB_USERNAME, DB_PASSWORD, DB_DATABASE, DB_HOST } = process.env;
-
-var con = mysql.createConnection({
-  host: DB_HOST,
-  user: DB_USERNAME,
-  password: DB_PASSWORD,
-  database: DB_DATABASE,
-  port: DB_PORT
-});
-
-con.connect(function(err) {
-  if (err) throw err;
-  console.log('Connected!');
-  con.query(`CREATE DATABASE IF NOT EXISTS newDB`, function (err, result) {
-    if (err) throw err;
-    console.log('Database created');
-    console.log(result);
-  });
-});
+const DBConnector = require('../utils/database/DBConnector');
+const log = require('../utils/logger');
 
 exports.index = (req, res, next) => {
-    res.send('THE API IS NOT A ☕ POT');
+    let success = 'THE API IS NOT A ☕ POT';
+    let failure = 'THE API IS A ☕ POT';
+    let handleFailure = (err) => {
+        log(`Connected to pool`);
+        res.send(failure);
+        throw err;
+    };
+    DBConnector.getConnection( (err, con) => {
+      if (err) (handleFailure(err));
+      log(`Connected to pool`);
+      con.query(`CREATE DATABASE IF NOT EXISTS newDB`, function (err, result) {
+        if (err) (handleFailure(err));
+        log(`newDB EXISTS`);
+        log(JSON.stringify(result));
+        res.send(success);
+      });
+      con.release();
+    });
 };
 
 exports.testPayload = (req, res, next) => {
