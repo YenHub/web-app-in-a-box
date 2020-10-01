@@ -1,5 +1,7 @@
-const log = (msg) => {
-    console.log(`[TestAPI-Controller] ${msg}`);
+const log = (msgSource) => {
+    return (msg) => {
+        console.log(`${msgSource} ${msg}`);
+    };
 };
 
-module.exports = log;
+exports.apiLog = log('[TestAPI]');

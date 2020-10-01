@@ -1,21 +1,21 @@
 const DBConnector = require('../utils/database/DBConnector');
-const log = require('../utils/logger');
+const { apiLog } = require('../utils/logger');
 
 exports.index = (req, res, next) => {
     let success = 'THE API IS NOT A ☕ POT';
     let failure = 'THE API IS A ☕ POT';
     let handleFailure = (err) => {
-        log(`Connected to pool`);
+        apiLog(`Connected to pool`);
         res.send(failure);
         throw err;
     };
     DBConnector.getConnection( (err, con) => {
       if (err) (handleFailure(err));
-      log(`Connected to pool`);
+      apiLog(`Connected to pool`);
       con.query(`CREATE DATABASE IF NOT EXISTS newDB`, function (err, result) {
         if (err) (handleFailure(err));
-        log(`newDB EXISTS`);
-        log(JSON.stringify(result));
+        apiLog(`newDB EXISTS`);
+        apiLog(JSON.stringify(result));
         res.send(success);
       });
       con.release();

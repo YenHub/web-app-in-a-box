@@ -18,6 +18,7 @@ function TestAPI() {
             fetch('http://localhost:9000/testAPI'),
             fetch('http://localhost:9000/testAPI/payload')
         ]).then(async ([testAPI, payLoad]) => {
+            log('API Call successful, setting state');
             const TestAPI = await testAPI.text();
             const PayLoad = await payLoad.json();
             return [TestAPI, PayLoad];
