@@ -7,7 +7,8 @@ const pool  = mysql.createPool({
     user: DB_USERNAME,
     password: DB_PASSWORD,
     database: DB_DATABASE,
-    port: DB_PORT
+    port: DB_PORT,
+    multipleStatements: true
 });
 
 const getConnection = function (cb) {
