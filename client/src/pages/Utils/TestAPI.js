@@ -26,6 +26,8 @@ function TestAPI() {
         .then(([testAPI, payLoad]) => {
             setApiResult(testAPI);
             setPayloadResult(payLoad);
+            log(testAPI);
+            log(payLoad.status);
             window.apiPayload = JSON.stringify(payLoad);
         }).catch(err => {
             log('API CALL HAS FAILED');

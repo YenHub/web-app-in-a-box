@@ -33,5 +33,5 @@ exports.index = (req, res, next) => {
 };
 
 exports.testPayload = (req, res, next) => {
-    res.json({status:'THE API IS NOT A TEAPOT'});
+    res.json({status:'THE API IS NOT A TEAPOT ☕'});
 };
