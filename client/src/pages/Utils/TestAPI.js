@@ -3,24 +3,36 @@ import teapot from '../../assets/tea-pot.svg';
 import '../../App.css';
 import classNames from 'classnames';
 
+const log = (msg) => {
+    console.log(`[TestAPI] ${msg}`);
+}
+
 function TestAPI() {
 
     const [apiResult, setApiResult] = useState('Attempting to call API ...');
     const [payloadResult, setPayloadResult] = useState({status: 'No API Results Yet'});
 
-    useEffect( () => {
-        console.log('Calling the API');
-        fetch("http://localhost:9000/testAPI")
-            .then(res => res.text())
-            .then(res => setApiResult(res))
-            .catch(err => setApiResult('FETCH FAILED'));
-        fetch("http://localhost:9000/testAPI/payload")
-            .then(res => res.json())
-            .then(res => {
-                setPayloadResult(res);
-                window.apiPayload = JSON.stringify(res);
-            })
-            .catch(err => setPayloadResult({status: 'THE API IS A ☕ POT'}));
+    useEffect(() => {
+        log('Calling the API');
+        Promise.all([
+            fetch('http://localhost:9000/testAPI'),
+            fetch('http://localhost:9000/testAPI/payload')
+        ]).then(async ([testAPI, payLoad]) => {
+            const TestAPI = await testAPI.text();
+            const PayLoad = await payLoad.json();
+            return [TestAPI, PayLoad];
+        })
+        .then(([testAPI, payLoad]) => {
+            setApiResult(testAPI);
+            setPayloadResult(payLoad);
+            window.apiPayload = JSON.stringify(payLoad);
+        }).catch(err => {
+            log('API CALL HAS FAILED');
+            setPayloadResult({status: 'THE API IS A ☕ POT'});
+            setApiResult('FETCH FAILED');
+            throw err;
+        });
+
     }, []); // << DON'T FORGET TO NO DEPS IF YOU DON'T WANT TO SPAM IT...!
 
     function getClasses() {
