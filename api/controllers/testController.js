@@ -32,6 +32,22 @@ exports.index = (req, res, next) => {
     });
 };
 
+exports.reset = (req, res, next) => {
+    DBConnector.getConnection( (err, con) => {
+      if (err) (handleFailure(err));
+      apiLog(`Connected to pool`);
+      let sqlStatement = `UPDATE testTable SET HitCount = '0' WHERE testTable.ID = 1;
+          SELECT HitCount FROM testTable WHERE ID = 1`;
+      con.query( sqlStatement, function (err, result) {
+        if (err) (handleFailure(err));
+        apiLog(`Reset API Calls`);
+        apiLog(`Total Successful Test API Calls: ${result.slice(-1)[0][0].HitCount} 🎉`);
+        res.send(`${result.slice(-1)[0][0].HitCount.toString()} Successful API Calls`);
+      });
+      con.release();
+    });
+}
+
 exports.testPayload = (req, res, next) => {
     res.json({status:'THE API IS NOT A TEAPOT ☕'});
 };
