@@ -46,6 +46,7 @@ function TestAPI() {
         .then(([testAPI, payLoad]) => {
             setApiResult(testAPI);
             setPayloadResult(payLoad);
+            setAPIStatus(0);
             log(testAPI);
             log(payLoad.status);
             window.apiPayload = JSON.stringify(payLoad);
@@ -53,7 +54,7 @@ function TestAPI() {
             log('API CALL HAS FAILED');
             setPayloadResult({status: 'THE API IS A ☕ POT'});
             setApiResult('FETCH FAILED');
-            throw err;
+            setAPIStatus(-1);
         });
 
     }, []); // << DON'T FORGET TO NO DEPS IF YOU DON'T WANT TO SPAM IT...!
@@ -67,17 +68,19 @@ function TestAPI() {
 
     const handleApiReset = () => {
             resetAPI().then( (res) => {
+                console.log(res);
                 if (res.status !== 200) {
                     setAPIStatus(-1);
                     return false;
                 };
                 setApiResult(`0 Successful API Calls`);
-            });
+            }).catch( () => setAPIStatus(-1) );
     }
 
     function handleApiCall() {
         return createAPICall()
             .then( async ( res ) => {
+                console.log(res);
                 setAPIStatus(-1);
                 if (res.status !== 200) {
                     setAPIStatus(-1);
@@ -87,7 +90,20 @@ function TestAPI() {
                 setApiResult(`0 Successful API Calls`);
                 setApiResult(apiResult);
                 setAPIStatus(0);
-            })
+            }).catch( () => setAPIStatus(-1) );
+    }
+
+    function mapButtons() {
+        return [
+            {cB: handleApiCall, text: 'CALL API', type: 'default', contained: true},
+            {cB: handleApiReset, text: apiStatus !== -1 ? 'RESET API' : 'RESET FAILED', type: 'primary'},
+        ].map( (button, ind) => {
+            return (
+                <Button key={ind} variant={apiStatus !== -1 && !button.contained ? 'outlined' : 'contained'} color={apiStatus !== -1 ? button.type : 'secondary'} onClick={button.cB}>
+                    {button.text}
+                </Button>
+            )
+        })
     }
 
     return (
@@ -98,12 +114,7 @@ function TestAPI() {
                     API STATUS: {apiResult}
                 </p>
                 <div className={classes.root}>
-                    <Button variant="contained" color={apiStatus !== -1 ? 'default' : 'error'} className={classes.success} onClick={handleApiCall}>
-                        CALL API
-                    </Button>
-                    <Button variant="contained" color={apiStatus !== -1 ? 'primary' : 'error'} onClick={handleApiReset}>
-                        {apiStatus !== -1 ? 'RESET API' : 'RESET FAILED'}
-                    </Button>
+                    {mapButtons()}
                 </div>
           </header>
       </div>
