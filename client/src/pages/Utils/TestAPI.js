@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react';
 import teapot from '../../assets/tea-pot.svg';
-import '../../App.css';
 import classNames from 'classnames';
 import Button from '@material-ui/core/Button';
 import { makeStyles } from '@material-ui/core/styles';
@@ -107,17 +106,15 @@ function TestAPI() {
     }
 
     return (
-        <div className="App">
-            <header className="App-header">
-                <img src={teapot} className={getClasses()} alt="logo" />
-                <p className="tea-pot-font">
-                    API STATUS: {apiResult}
-                </p>
-                <div className={classes.root}>
-                    {mapButtons()}
-                </div>
-          </header>
-      </div>
+        <div>
+            <img src={teapot} className={getClasses()} alt="logo" />
+            <p className="tea-pot-font">
+                API STATUS: {apiResult}
+            </p>
+            <div className={classes.root}>
+                {mapButtons()}
+            </div>
+        </div>
     );
 }
 

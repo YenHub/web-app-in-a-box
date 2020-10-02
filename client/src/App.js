@@ -5,19 +5,19 @@ import {
     Switch,
     Route
 } from 'react-router-dom';
+import Wrapper from './pages/Generic/App';
 
 import TestAPI from './pages/Utils/TestAPI'
 
 function App() {
 
-    return (
+    return Wrapper(
         <Router>
           <Switch>
             <Route path="/TestAPI">
               <TestAPI />
             </Route>
           </Switch>
-
       </Router>
     );
 }
