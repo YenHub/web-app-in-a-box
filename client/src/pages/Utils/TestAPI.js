@@ -41,7 +41,7 @@ function TestAPI() {
     function getClasses() {
 
         return classNames('App-logo', {
-            spin: payloadResult.status === 'THE API IS NOT A TEAPOT'  ? true : false,
+            spin: payloadResult.status === 'THE API IS NOT A TEAPOT ☕'  ? true : false,
         })
     }
 
