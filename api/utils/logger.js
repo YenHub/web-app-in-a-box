@@ -1,6 +1,7 @@
 const log = (msgSource) => {
     return (msg) => {
-        console.log(`${msgSource} ${msg}`);
+        let date = new Date().toLocaleTimeString();
+        console.log(`${date} ${msgSource} ${msg}`);
     };
 };
 
