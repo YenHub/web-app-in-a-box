@@ -18,6 +18,8 @@ services:
      MYSQL_PASSWORD:       ${DB_PASSWORD}
    networks:
      - app-network
+   volumes:
+     - ${MYSQL_HOST_VOLUME:-./docker_volumes/var/lib/mysql}:/var/lib/mysql
 
  web-app:
     container_name:        react-express-web-app
