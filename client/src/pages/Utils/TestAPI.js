@@ -11,6 +11,9 @@ const useStyles = makeStyles((theme) => ({
       margin: theme.spacing(1),
     },
   },
+  success: {
+      backgroundColor: '#00ff00',
+  }
 }));
 
 
@@ -95,10 +98,10 @@ function TestAPI() {
                     API STATUS: {apiResult}
                 </p>
                 <div className={classes.root}>
-                    <Button variant="contained" color={apiStatus !== -1 ? 'default' : 'secondary'} onClick={handleApiCall}>
+                    <Button variant="contained" color={apiStatus !== -1 ? 'default' : 'error'} className={classes.success} onClick={handleApiCall}>
                         CALL API
                     </Button>
-                    <Button variant="contained" color={apiStatus !== -1 ? 'primary' : 'secondary'} onClick={handleApiReset}>
+                    <Button variant="contained" color={apiStatus !== -1 ? 'primary' : 'error'} onClick={handleApiReset}>
                         {apiStatus !== -1 ? 'RESET API' : 'RESET FAILED'}
                     </Button>
                 </div>
