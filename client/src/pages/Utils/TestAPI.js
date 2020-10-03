@@ -26,22 +26,23 @@ const log = (msg) => {
     console.log(`[TestAPI] ${msg}`);
 }
 
-const createAPICall =  () => fetch('http://localhost:9000/testAPI');
-const apiPayloadTest = () => fetch('http://localhost:9000/testAPI/payload');
-const resetAPI = () => fetch('http://localhost:9000/testAPI/reset');
-
-const APIStatus = {
-    0: 'Dead',
-    1: 'Alive',
-    2: 'Processing'
-};
-
 function TestAPI() {
 
     const classes = useStyles();
+
     const [apiResult, setApiResult] = useState('Attempting to call API ...');
     const [payloadResult, setPayloadResult] = useState({status: 'No API Results Yet'});
-    const [apiStatus, setAPIStatus] = useState(APIStatus[2]);
+    const [apiStatus, setAPIStatus] = useState('Processing');
+
+    const APIStatus = {
+        0: 'Dead',
+        1: 'Alive',
+        2: 'Processing'
+    };
+
+    const createAPICall =  () => fetch('http://localhost:9000/testAPI');
+    const apiPayloadTest = () => fetch('http://localhost:9000/testAPI/payload');
+    const resetAPI = () => fetch('http://localhost:9000/testAPI/reset');
 
     useEffect(() => {
 
@@ -75,6 +76,7 @@ function TestAPI() {
 
     }, []); // << DON'T FORGET TO NO DEPS IF YOU DON'T WANT TO SPAM IT...!
 
+    // Utils
     function getClasses() {
 
         return classNames('App-logo', {
@@ -82,6 +84,7 @@ function TestAPI() {
         })
     }
 
+    // API Utils
     const handleApiReset = () => {
             resetAPI().then( (res) => {
                 console.log(res);
@@ -146,6 +149,7 @@ function TestAPI() {
         }
     };
 
+    // UI Helpers
     function mapButtons() {
 
         return [
@@ -184,6 +188,7 @@ function TestAPI() {
         )
     }
 
+    // Loading Spinner
     if(apiStatus === APIStatus[2]) {
         return ( <CircularProgress /> );
     }
