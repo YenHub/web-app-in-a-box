@@ -98,20 +98,22 @@ function TestAPI() {
     }
 
     function handleApiCall(_timeout = 500) {
-        return setTimeout( () => {
-            createAPICall()
-                .then( async ( res ) => {
-                    console.log(res);
-                    if (res.status !== 200) {
-                        setAPIStatus(0);
-                        return false;
-                    };
-                    const apiResult = await res.text();
-                    setApiResult(`0 Successful API Calls`);
-                    setApiResult(apiResult);
-                    setAPIStatus(APIStatus[1]);
-                }).catch( () => setAPIStatus(0) );
-        }, _timeout)
+        return createAPICall()
+            .then( async ( res ) => {
+                console.log(res);
+                if (res.status !== 200) {
+                    setAPIStatus(0);
+                    return false;
+                };
+                const apiResult = await res.text();
+                setApiResult(apiResult);
+            })
+            .then( () => setAPIStatus(APIStatus[1]) )
+            .catch( () => setAPIStatus(0) );
+
+        //     setTimeout( () => {
+        //
+        // }, _timeout)
     }
 
     let spamCalls = 0;
@@ -120,14 +122,16 @@ function TestAPI() {
       return new Promise(function(resolve, reject) {
         const timeout = setTimeout(function() {
             reject(setAPIStatus(0));
-        }, 250);
-        fetch('http://localhost:9000/testAPI/payload').then( () => {
-            log('In the promise');
-            clearTimeout(timeout);
-            resolve();
-        }, () => {
-            reject(setAPIStatus(0));
-        });
+        }, 3000);
+        fetch('http://localhost:9000')
+            .then( (res) => {
+                if(res.status !== 403) {
+                    return;
+                }
+                clearTimeout(timeout);
+                resolve(setAPIStatus(APIStatus[1]));
+            })
+            .catch( () => reject(setAPIStatus(0)));
       })
     }
 
@@ -143,9 +147,9 @@ function TestAPI() {
             setTimeout( spamApiCall, 50);
             spamCalls++
         } else {
-            onlineCheck();
-            handleApiCall(10);
             spamCalls = 0;
+            handleApiCall(0);
+            setTimeout(onlineCheck, 1500);
         }
     };
 
