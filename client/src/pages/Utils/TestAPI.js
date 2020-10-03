@@ -26,6 +26,10 @@ const log = (msg) => {
     console.log(`[TestAPI] ${msg}`);
 }
 
+const createAPICall =  () => fetch('http://localhost:9000/testAPI');
+const apiPayloadTest = () => fetch('http://localhost:9000/testAPI/payload');
+const resetAPI = () => fetch('http://localhost:9000/testAPI/reset');
+
 const APIStatus = {
     0: 'Dead',
     1: 'Alive',
@@ -38,10 +42,6 @@ function TestAPI() {
     const [apiResult, setApiResult] = useState('Attempting to call API ...');
     const [payloadResult, setPayloadResult] = useState({status: 'No API Results Yet'});
     const [apiStatus, setAPIStatus] = useState(APIStatus[2]);
-
-    const createAPICall =  () => fetch('http://localhost:9000/testAPI');
-    const apiPayloadTest = () => fetch('http://localhost:9000/testAPI/payload');
-    const resetAPI = () => fetch('http://localhost:9000/testAPI/reset');
 
     useEffect(() => {
 
@@ -83,7 +83,6 @@ function TestAPI() {
     }
 
     const handleApiReset = () => {
-            setAPIStatus(APIStatus[2]);
             resetAPI().then( (res) => {
                 console.log(res);
                 if (res.status !== 200) {
@@ -96,12 +95,10 @@ function TestAPI() {
     }
 
     function handleApiCall(_timeout = 500) {
-        setAPIStatus(APIStatus[2]);
         return setTimeout( () => {
             createAPICall()
                 .then( async ( res ) => {
                     console.log(res);
-                    setAPIStatus(-1);
                     if (res.status !== 200) {
                         setAPIStatus(0);
                         return false;
@@ -109,15 +106,31 @@ function TestAPI() {
                     const apiResult = await res.text();
                     setApiResult(`0 Successful API Calls`);
                     setApiResult(apiResult);
-                    setAPIStatus(1);
+                    setAPIStatus(APIStatus[1]);
                 }).catch( () => setAPIStatus(0) );
         }, _timeout)
     }
 
     let spamCalls = 0;
 
-    function spamApiCall() {
-        if(spamCalls === 1) {
+    function onlineCheck(promise) {
+      return new Promise(function(resolve, reject) {
+        const timeout = setTimeout(function() {
+            reject(setAPIStatus(0));
+        }, 250);
+        fetch('http://localhost:9000/testAPI/payload').then( () => {
+            log('In the promise');
+            clearTimeout(timeout);
+            resolve();
+        }, () => {
+            reject(setAPIStatus(0));
+        });
+      })
+    }
+
+    async function spamApiCall() {
+        if(spamCalls === 0) {
+            createAPICall();
             setAPIStatus(APIStatus[2]);
         }
         createAPICall();
@@ -127,9 +140,8 @@ function TestAPI() {
             setTimeout( spamApiCall, 50);
             spamCalls++
         } else {
-            createAPICall();
+            onlineCheck();
             handleApiCall(10);
-            setTimeout( () => handleApiCall(10), 20000);
             spamCalls = 0;
         }
     };
@@ -155,19 +167,20 @@ function TestAPI() {
     }
 
     function getStatusText() {
+
         return `API STATUS: ${apiStatus ? apiResult : 'THE API IS A ☕ POT'}`
     }
 
     function showTeapot() {
 
-        if(!apiStatus) {
-            return (
-                <img src={teapot} className={getClasses()} alt="logo" />
-            )
-        }
+        /**************************************************************
+         * Note, you won't see the benefit of this in Dev             *
+         * Using npm run start-sw will activate local Service Workers *
+         * SW which will cache the image as it would in production    *
+         **************************************************************/
 
         return (
-            <img src={robot} className={getClasses()} alt="logo" />
+            <img src={apiStatus ? robot : teapot } className={getClasses()} alt="logo" />
         )
     }
 
