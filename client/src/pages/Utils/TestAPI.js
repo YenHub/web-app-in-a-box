@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import teapot from '../../assets/tea-pot.svg';
+import robot from '../../assets/robot.svg';
 import classNames from 'classnames';
 
 import Button from '@material-ui/core/Button';
@@ -25,13 +26,13 @@ const log = (msg) => {
     console.log(`[TestAPI] ${msg}`);
 }
 
-function TestAPI() {
+const APIStatus = {
+    0: 'Dead',
+    1: 'Alive',
+    2: 'Processing'
+};
 
-    const APIStatus = {
-        0: 'Dead',
-        1: 'Alive',
-        2: 'Processing'
-    };
+function TestAPI() {
 
     const classes = useStyles();
     const [apiResult, setApiResult] = useState('Attempting to call API ...');
@@ -69,7 +70,7 @@ function TestAPI() {
                 setApiResult('FETCH FAILED');
                 setAPIStatus(0);
             });
-        }, 500)
+        }, 250)
 
 
     }, []); // << DON'T FORGET TO NO DEPS IF YOU DON'T WANT TO SPAM IT...!
@@ -122,22 +123,18 @@ function TestAPI() {
         createAPICall();
         createAPICall();
         createAPICall();
-        createAPICall();
-        createAPICall();
-        if (spamCalls < 99) {
+        if (spamCalls < 165) {
             setTimeout( spamApiCall, 50);
             spamCalls++
         } else {
+            createAPICall();
             handleApiCall(10);
+            setTimeout( () => handleApiCall(10), 20000);
             spamCalls = 0;
         }
     };
 
     function mapButtons() {
-
-        if(apiStatus === APIStatus[2]) {
-            return ( <CircularProgress /> );
-        }
 
         return [
             {cB: handleApiCall, text: 'CALL API', type: 'default', contained: true},
@@ -158,15 +155,19 @@ function TestAPI() {
     }
 
     function getStatusText() {
-        if(apiStatus === APIStatus[2]) {
-            return null;
-        }
         return `API STATUS: ${apiStatus ? apiResult : 'THE API IS A ☕ POT'}`
     }
 
     function showTeapot() {
+
+        if(!apiStatus) {
+            return (
+                <img src={teapot} className={getClasses()} alt="logo" />
+            )
+        }
+
         return (
-            <img src={teapot} className={getClasses()} alt="logo" />
+            <img src={robot} className={getClasses()} alt="logo" />
         )
     }
 
