@@ -35,8 +35,8 @@ _This file is .gitignored_
 
 ```.env
 DB_PORT=3306
-DB_USERNAME='root'
-DB_PASSWORD='some_wi1d-pa$$word'
+DB_USERNAME=root
+DB_PASSWORD=some_wi1d-pa$$word
 DB_DATABASE=nodeDB
 DB_HOST=react-express-mysql
 ```

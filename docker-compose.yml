@@ -20,6 +20,8 @@ services:
      - app-network
    volumes:
      - ${MYSQL_HOST_VOLUME:-./docker_volumes/var/lib/mysql}:/var/lib/mysql
+   env_file:
+     - ./api/.env
 
  web-app:
     container_name:        react-express-web-app
@@ -71,6 +73,8 @@ services:
       - /sessions
     networks:
       - app-network
+    env_file:
+      - ./api/.env
 
 networks:
   app-network:
