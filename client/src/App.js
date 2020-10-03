@@ -5,7 +5,7 @@ import {
     Switch,
     Route
 } from 'react-router-dom';
-import Wrapper from './pages/Generic/App';
+import Wrapper from './pages/Generic/Wrapper';
 
 import TestAPI from './pages/Utils/TestAPI'
 
