@@ -24,7 +24,7 @@ No mucking around! 🎉
 
 ---
 
-## Usage
+## Quick Start Usage
 
 The best way to run this solution is via Docker using WSL2 with your distro of preference.
 
