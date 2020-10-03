@@ -3,7 +3,7 @@ version:                   '3.1'
 services:
  node-mysql:
    container_name:         react-express-mysql
-   image:                  mysql
+   image:                  mysql:latest
    command:                --default-authentication-plugin=mysql_native_password
    restart:                unless-stopped
    ports:
@@ -12,16 +12,19 @@ services:
      - 3306
    environment:
      MYSQL_HOST:           localhost
-     MYSQL_ROOT_PASSWORD:  ${DB_PASSWORD:-toor}
-     MYSQL_DATABASE:       ${DB_DATABASE:-nodeDB}
-     MYSQL_USER:           ${DB_USERNAME:-root}
-     MYSQL_PASSWORD:       ${DB_PASSWORD:-toor}
+     MYSQL_ROOT_PASSWORD:  ${DB_PASSWORD}
+     MYSQL_DATABASE:       ${DB_DATABASE}
+     MYSQL_USER:           ${DB_USERNAME}
+     MYSQL_PASSWORD:       ${DB_PASSWORD}
    networks:
      - app-network
    volumes:
      - ${MYSQL_HOST_VOLUME:-./docker_volumes/var/lib/mysql}:/var/lib/mysql
    env_file:
      - ./api/.env
+   cap_add:
+     - SYS_NICE  # CAP_SYS_NICE
+
 
  web-app:
     container_name:        react-express-web-app
@@ -52,6 +55,9 @@ services:
       - 9000
     environment:
       - NODE_ENV=development
+      - DB_PASSWORD=${DB_PASSWORD}
+      - DB_DATABASE=${DB_DATABASE}
+      - DB_USERNAME=${DB_USERNAME}
     volumes:
       - ./api:/app
       - /app/node_modules
@@ -64,8 +70,8 @@ services:
     environment:
       PMA_ARBITRARY:       1
       PMA_HOST:            react-express-mysql
-      PMA_USER:            ${DB_USERNAME:-root}
-      PMA_PASSWORD:        ${DB_PASSWORD:-toor}
+      PMA_USER:            ${DB_USERNAME}
+      PMA_PASSWORD:        ${DB_PASSWORD}
     restart:               unless-stopped
     ports:
      - 8080:80
