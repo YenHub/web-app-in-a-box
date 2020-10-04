@@ -10,7 +10,7 @@
     - [Run the solution using Docker 🐳](#run-the-solution-using-docker-)
     - [What now?](#What-now?)
 - [Development Info](#Development-Info)
-    - [Running the solutions standalone](running-the-front-or-back-end-standalone)
+    - [Running the solutions standalone](#running-the-front-or-back-end-standalone)
     - [Running the entire system](#docker-running-the-full-solution)
     - [Backing up your database](#backing-up-your-database)
 - [Project To Dos & Dones](#project-to-dos--dones)
