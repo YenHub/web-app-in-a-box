@@ -17,7 +17,7 @@ services:
      MYSQL_USER:           ${DB_USERNAME}
      MYSQL_PASSWORD:       ${DB_PASSWORD}
    networks:
-     - app-network
+     - api-network
    volumes:
      - ${MYSQL_HOST_VOLUME:-./docker_volumes/var/lib/mysql}:/var/lib/mysql
    env_file:
@@ -62,6 +62,7 @@ services:
       - ./api:/app
       - /app/node_modules
     networks:
+      - api-network
       - app-network
 
  phpmyadmin:
@@ -78,10 +79,11 @@ services:
     volumes:
       - /sessions
     networks:
-      - app-network
+      - api-network
     env_file:
       - ./api/.env
 
 networks:
   app-network:
+  api-network:
     driver:                bridge
