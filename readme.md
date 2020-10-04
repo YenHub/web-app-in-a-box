@@ -37,6 +37,27 @@ No mucking around! 🎉
         - JWT
         - Basic Users management
 
+## Project To Dos & Dones
+
+- [ ] Front End
+    - [ ] Views
+        - [x] TestAPI
+            - http://localhost/TestAPI
+        - [ ] User Admin
+            - http://localhost/Admin/Users
+    - [ ] Auth
+        - JWT
+        - Basic Users management
+- [ ] Back End
+    - [ ] Endpoints
+        - http://localhost:9000/testAPI/
+        - http://localhost:9000/testAPI/payload
+    - [ ] Auth
+        - JWT
+        - Basic Users management
+
+---
+
 ## Quick Start Usage
 
 
