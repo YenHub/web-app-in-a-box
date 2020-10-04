@@ -2,6 +2,24 @@
 
 ![Author] ![Progress] ![Project Status] ![Open Issues] ![React Version] ![ExpressJS Version] ![Beer Money]
 
+## What is it?
+
+This is essentially a Web App in a box, front and back end, built with the magic of Docker 🐳
+
+We have an ExpressJS Web API, using WebSQL for it's data store.
+
+![demo]
+
+The front end is React based and there is also a pre-configured phpMyAdmin instance to compliment the setup, all running in an isolated environment in the root of the project!
+
+## What does it do?
+
+Whatever you want it to do really, the idea is, it's a simple, easy and fast full stack javascript web app in a box, front end, back end and DB included!
+
+No mucking around! 🎉
+
+## TOC
+
 - [TLDR](#tldr)
 - [What is it?](#what-is-it)
 - [What does it do?](#what-does-it-do)
@@ -21,22 +39,6 @@
 git clone git@github.com:YenHub/web-app-in-a-box.git
 docker-compose up --build -d && chrome http://localhost/TestAPI
 ```
-
-## What is it?
-
-This is essentially a Web App in a box, front and back end, built with the magic of Docker 🐳
-
-We have an ExpressJS Web API, using WebSQL for it's data store.
-
-![demo]
-
-The front end is React based and there is also a pre-configured phpMyAdmin instance to compliment the setup, all running in an isolated environment in the root of the project!
-
-## What does it do?
-
-Whatever you want it to do really, the idea is, it's a simple, easy and fast full stack javascript web app in a box, front end, back end and DB included!
-
-No mucking around! 🎉
 
 ## Quick Start Usage
 
