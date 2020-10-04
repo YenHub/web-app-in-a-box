@@ -168,13 +168,15 @@ The MySQL instance is volume bound to: `./docker-volumes` and is also in `.gitig
         - [ ] Basic User management CRUD
 
 [Author]: https://img.shields.io/badge/made%20by-YenHub%20❤-blue
-[Progress]:https://img.shields.io/badge/progress-dev-ff69b4
-[Project Status]: https://img.shields.io/badge/status-active-brightgreen
-[Open Issues]:https://img.shields.io/github/issues-raw/YenHub/web-app-in-a-box
 [React Version]:https://img.shields.io/badge/React-16.13.1-important
 [ExpressJS Version]:https://img.shields.io/badge/ExpressJS-4.16.1-blueviolet
 [Beer Money]:https://img.shields.io/badge/beer%20money-$0-ff69b4
-[demo]: ./web-app.png
 
 [Last Commit]: https://img.shields.io/github/last-commit/YenHub/web-app-in-a-box
+[Open Issues]:https://img.shields.io/github/issues-raw/YenHub/web-app-in-a-box
+[Progress]:https://img.shields.io/badge/progress-dev-brightgreen
+[Project Status]: https://img.shields.io/badge/status-active-brightgreen
 [Repo Size]: https://img.shields.io/github/repo-size/YenHub/web-app-in-a-box
+
+[demo]: ./web-app.png
+
