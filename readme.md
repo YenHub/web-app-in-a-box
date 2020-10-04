@@ -34,15 +34,18 @@ No mucking around! 🎉
         - [ ] User Admin
             - http://localhost/Admin/Users
     - [ ] Auth
-        - JWT
-        - Basic Users management
+        - [ ] JWT
+        - [ ] Basic User management
+            - [ ] View
+            - [ ] Edit
+            - [ ] Roles
 - [ ] Back End
     - [ ] Endpoints
         - http://localhost:9000/testAPI/
         - http://localhost:9000/testAPI/payload
     - [ ] Auth
-        - JWT
-        - Basic User management
+        - [ ] JWT
+        - [ ] Basic User management CRUD
 
 ## Quick Start Usage
 
