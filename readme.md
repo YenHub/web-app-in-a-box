@@ -2,6 +2,13 @@
 
 ![Author] ![Progress] ![Project Status] ![Open Issues] ![React Version] ![ExpressJS Version] ![Beer Money]
 
+## TLDR;
+
+```bash
+git clone git@github.com:YenHub/web-app-in-a-box.git
+docker-compose up --build -d && chrome http://localhost/TestAPI
+```
+
 ## What is it?
 
 This is essentially a Web App in a box, front and back end, built with the magic of Docker 🐳
