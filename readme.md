@@ -55,8 +55,10 @@ No mucking around! 🎉
             - [ ] Roles
 - [ ] Back End
     - [ ] Endpoints
-        - http://localhost:9000/testAPI/
-        - http://localhost:9000/testAPI/payload
+        - [x] API Status Test
+            - http://localhost:9000/testAPI/
+            - http://localhost:9000/testAPI/payload
+        - [ ] User Controllers CRUD
     - [ ] Auth
         - [ ] JWT
         - [ ] Basic User management CRUD
