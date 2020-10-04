@@ -27,6 +27,20 @@ No mucking around! 🎉
 
 ## Project To Dos & Dones
 
+- [x] Dockerize Solution
+    - [x] Isolate Networks
+        - api-network
+        - app-network
+    - [x] Front End
+        - [x] React
+            - http://localhost
+    - [x] Backend End
+        - [x] MySQL
+            - http://localhost:3306
+        - [x] phpMyAdmin
+            - http://localhost:8080
+        - [x] API
+            - http://localhost:9000
 - [ ] Front End
     - [ ] Views
         - [x] TestAPI
