@@ -151,12 +151,14 @@ The MySQL instance is volume bound to: `./docker-volumes` and is also in `.gitig
             - http://localhost/TestAPI
         - [ ] User Admin
             - http://localhost/Admin/Users
-    - [ ] Auth
-        - [ ] JWT
-        - [ ] Basic User management
-            - [ ] View
-            - [ ] Edit
-            - [ ] Roles
+    - [ ] Gubbins
+        - [ ] Redux
+        - [ ] TypeScript
+        - [ ] Auth
+            - [ ] JWT
+            - [ ] Basic User management
+                - [ ] View
+                - [ ] Edit / Delete
 - [ ] Back End
     - [ ] Endpoints
         - [x] API Status Test
@@ -166,8 +168,10 @@ The MySQL instance is volume bound to: `./docker-volumes` and is also in `.gitig
     - [ ] Auth
         - [ ] JWT
         - [ ] Basic User management CRUD
+            - [ ] Roles
+            - [ ] Permissions
 
-[Author]: https://img.shields.io/badge/made%20by-YenHub%20❤-blue
+[Author]: https://img.shields.io/badge/made%20by-YenHub%20❤♥-blue
 [React Version]:https://img.shields.io/badge/React-16.13.1-important
 [ExpressJS Version]:https://img.shields.io/badge/ExpressJS-4.16.1-blueviolet
 [Beer Money]:https://img.shields.io/badge/beer%20money-$0-ff69b4
