@@ -155,6 +155,7 @@ The MySQL instance is volume bound to: `./docker-volumes` and is also in `.gitig
     - [ ] Gubbins
         - [ ] Redux
         - [ ] TypeScript
+        - [ ] Jest tests
         - [ ] Auth
             - [ ] JWT
             - [ ] Basic User management
