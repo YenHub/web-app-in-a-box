@@ -36,10 +36,9 @@ No mucking around! 🎉
 
 ## TLDR;
 
-```bash
-git clone git@github.com:YenHub/web-app-in-a-box.git
-docker-compose up --build -d && chrome http://localhost/TestAPI
-```
+1. `git clone git@github.com:YenHub/web-app-in-a-box.git`
+2. Create your .env config [(how do)](#create-a-env-config)
+3. `docker-compose up --build -d && chrome http://localhost/TestAPI`
 
 ## Quick Start Usage
 
