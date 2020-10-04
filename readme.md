@@ -130,6 +130,8 @@ The MySQL instance is volume bound to: `./docker-volumes` and is also in `.gitig
 
 ## Project To Dos & Dones
 
+- [ ] Make it better
+    - In progress... forever™
 - [x] Dockerize Solution
     - [x] Isolate Networks
         - api-network
