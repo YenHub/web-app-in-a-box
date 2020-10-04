@@ -2,8 +2,6 @@
 
 ![Author] ![Progress] ![Project Status] ![Open Issues] ![React Version] ![ExpressJS Version] ![Beer Money]
 
----
-
 ## What is it?
 
 This is essentially a Web App in a box, front and back end, built with the magic of Docker 🐳
@@ -14,15 +12,30 @@ We have an ExpressJS Web API, using WebSQL for it's data store.
 
 The front end is React based and there is also a pre-configured phpMyAdmin instance to compliment the setup, all running in an isolated environment in the root of the project!
 
----
-
 ## What does it do?
 
 Whatever you want it to do really, the idea is, it's a simple, easy and fast full stack javascript web app in a box, front end, back end and DB included!
 
 No mucking around! 🎉
 
----
+## Project To Dos & Dones
+
+- [ ] Front End
+    - [ ] Views
+        - [x] TestAPI
+            - http://localhost/TestAPI
+        - [ ] User Admin
+            - http://localhost/Admin/Users
+    - [ ] Auth
+        - JWT
+        - Basic Users management
+- [ ] Back End
+    - [ ] Endpoints
+        - http://localhost:9000/testAPI/
+        - http://localhost:9000/testAPI/payload
+    - [ ] Auth
+        - JWT
+        - Basic Users management
 
 ## Quick Start Usage
 
