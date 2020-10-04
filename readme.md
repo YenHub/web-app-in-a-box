@@ -2,18 +2,18 @@
 
 ![Author] ![Progress] ![Project Status] ![Open Issues] ![React Version] ![ExpressJS Version] ![Beer Money]
 
-- [TLDR](#TLDR;)
-- [What is it?](#What-is-it?)
-- [What does it do?](#What-does-it-do?)
-- [Quick Start Usage](#Quick-Start-Usage)
-    - [Create a .env config](#Create-a-.env-config)
-    - [Run the solution using Docker 🐳](#Run-the-solution-using-Docker-🐳)
+- [TLDR](#tldr)
+- [What is it?](#what-is-it)
+- [What does it do?](#what-does-it-do)
+- [Quick Start Usage](#quick-start-usage)
+    - [Create a .env config](#create-a-.env-config)
+    - [Run the solution using Docker 🐳](#run-the-solution-using-docker-)
     - [What now?](#What-now?)
 - [Development Info](#Development-Info)
-    - [Running the solutions standalone](#Running-the-front-or-back-end-standalone:)
-    - [Running the entire system](#Docker:-Running-the-full-solution)
-    - [Backing up your database](#Backing-up-your-database)
-- [Project To Dos & Dones](#Project-To-Dos-&-Dones)
+    - [Running the solutions standalone](running-the-front-or-back-end-standalone)
+    - [Running the entire system](#docker-running-the-full-solution)
+    - [Backing up your database](#backing-up-your-database)
+- [Project To Dos & Dones](#project-to-dos--dones)
 
 ## TLDR;
 
