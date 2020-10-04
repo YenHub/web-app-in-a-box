@@ -6,7 +6,7 @@
 - [What is it?](#what-is-it)
 - [What does it do?](#what-does-it-do)
 - [Quick Start Usage](#quick-start-usage)
-    - [Create a .env config](#create-a--env-config)
+    - [Create a .env config](#create-a-env-config)
     - [Run the solution using Docker 🐳](#run-the-solution-using-docker-)
     - [What now?](#what-now)
 - [Development Info](#development-info)
