@@ -2,6 +2,19 @@
 
 ![Author] ![Progress] ![Project Status] ![Open Issues] ![React Version] ![ExpressJS Version] ![Beer Money]
 
+- [TLDR](#TLDR;)
+- [What is it?](#What-is-it?)
+- [What does it do?](#What-does-it-do?)
+- [Quick Start Usage](#Quick-Start-Usage)
+    - [Create a .env config](#Create-a-.env-config)
+    - [Run the solution using Docker 🐳](#Run-the-solution-using-Docker-🐳)
+    - [What now?](#What-now?)
+- [Development Info](#Development-Info)
+    - [Running the solutions standalone](#Running-the-front-or-back-end-standalone:)
+    - [Running the entire system](#Docker:-Running-the-full-solution)
+    - [Backing up your database](#Backing-up-your-database)
+- [Project To Dos & Dones](#Project-To-Dos-&-Dones)
+
 ## TLDR;
 
 ```bash
@@ -24,44 +37,6 @@ The front end is React based and there is also a pre-configured phpMyAdmin insta
 Whatever you want it to do really, the idea is, it's a simple, easy and fast full stack javascript web app in a box, front end, back end and DB included!
 
 No mucking around! 🎉
-
-## Project To Dos & Dones
-
-- [x] Dockerize Solution
-    - [x] Isolate Networks
-        - api-network
-        - app-network
-    - [x] Front End
-        - [x] React
-            - http://localhost
-    - [x] Backend End
-        - [x] MySQL
-            - http://localhost:3306
-        - [x] phpMyAdmin
-            - http://localhost:8080
-        - [x] API
-            - http://localhost:9000
-- [ ] Front End
-    - [ ] Views
-        - [x] TestAPI
-            - http://localhost/TestAPI
-        - [ ] User Admin
-            - http://localhost/Admin/Users
-    - [ ] Auth
-        - [ ] JWT
-        - [ ] Basic User management
-            - [ ] View
-            - [ ] Edit
-            - [ ] Roles
-- [ ] Back End
-    - [ ] Endpoints
-        - [x] API Status Test
-            - http://localhost:9000/testAPI/
-            - http://localhost:9000/testAPI/payload
-        - [ ] User Controllers CRUD
-    - [ ] Auth
-        - [ ] JWT
-        - [ ] Basic User management CRUD
 
 ## Quick Start Usage
 
@@ -150,6 +125,44 @@ docker exec -it [container_name] mysql -uroot -p
 The database is defined in `./docker-compose.yml`
 
 The MySQL instance is volume bound to: `./docker-volumes` and is also in `.gitignore`
+
+## Project To Dos & Dones
+
+- [x] Dockerize Solution
+    - [x] Isolate Networks
+        - api-network
+        - app-network
+    - [x] Front End
+        - [x] React
+            - http://localhost
+    - [x] Backend End
+        - [x] MySQL
+            - http://localhost:3306
+        - [x] phpMyAdmin
+            - http://localhost:8080
+        - [x] API
+            - http://localhost:9000
+- [ ] Front End
+    - [ ] Views
+        - [x] TestAPI
+            - http://localhost/TestAPI
+        - [ ] User Admin
+            - http://localhost/Admin/Users
+    - [ ] Auth
+        - [ ] JWT
+        - [ ] Basic User management
+            - [ ] View
+            - [ ] Edit
+            - [ ] Roles
+- [ ] Back End
+    - [ ] Endpoints
+        - [x] API Status Test
+            - http://localhost:9000/testAPI/
+            - http://localhost:9000/testAPI/payload
+        - [ ] User Controllers CRUD
+    - [ ] Auth
+        - [ ] JWT
+        - [ ] Basic User management CRUD
 
 [Author]: https://img.shields.io/badge/made%20by-YenHub%20❤-blue
 [Progress]:https://img.shields.io/badge/progress-dev-ff69b4
