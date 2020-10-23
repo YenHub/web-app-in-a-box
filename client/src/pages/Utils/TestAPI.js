@@ -112,10 +112,6 @@ function TestAPI() {
             })
             .then( () => setAPIStatus(APIStatus[1]) )
             .catch( () => setAPIStatus(0) );
-
-        //     setTimeout( () => {
-        //
-        // }, _timeout)
     }
 
     let spamCalls = 0;
