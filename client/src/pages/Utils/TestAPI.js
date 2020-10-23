@@ -26,6 +26,8 @@ const log = (msg) => {
     console.log(`[TestAPI] ${msg}`);
 }
 
+const APIuri = process.env.REACT_APP_ENV === 'development' ? process.env.REACT_APP_API_DEV : process.env.REACT_APP_API;
+
 function TestAPI() {
 
     const classes = useStyles();
@@ -40,9 +42,9 @@ function TestAPI() {
         2: 'Processing'
     };
 
-    const createAPICall =  () => fetch('http://localhost:9000/testAPI');
-    const apiPayloadTest = () => fetch('http://localhost:9000/testAPI/payload');
-    const resetAPI = () => fetch('http://localhost:9000/testAPI/reset');
+    const createAPICall =  () => fetch(`${APIuri}/testAPI`);
+    const apiPayloadTest = () => fetch(`${APIuri}/testAPI/payload`);
+    const resetAPI = () => fetch(`${APIuri}/testAPI/reset`);
 
     useEffect(() => {
 
@@ -73,7 +75,7 @@ function TestAPI() {
             });
         }, 250)
 
-
+    // eslint-disable-next-line
     }, []); // << DON'T FORGET TO NO DEPS IF YOU DON'T WANT TO SPAM IT...!
 
     // Utils
@@ -123,7 +125,7 @@ function TestAPI() {
         const timeout = setTimeout(function() {
             reject(setAPIStatus(0));
         }, 3000);
-        fetch('http://localhost:9000')
+        fetch(`${APIuri}`)
             .then( (res) => {
                 if(res.status !== 403) {
                     return;
@@ -143,8 +145,8 @@ function TestAPI() {
         createAPICall();
         createAPICall();
         createAPICall();
-        if (spamCalls < 165) {
-            setTimeout( spamApiCall, 50);
+        if(spamCalls < 165) {
+            setTimeout(spamApiCall, 50);
             spamCalls++
         } else {
             spamCalls = 0;
@@ -157,20 +159,25 @@ function TestAPI() {
     function mapButtons() {
 
         return [
-            {cB: handleApiCall, text: 'CALL API', type: 'default', contained: true},
-            {cB: spamApiCall, text: 'SPAM API', type: 'secondary'},
-            {cB: handleApiReset, text: 'RESET API', type: 'primary'},
+            { cB: handleApiCall, text: 'CALL API', type: 'default', contained: true },
+            { cB: spamApiCall, text: 'SPAM API', type: 'secondary', hide: process.env.REACT_APP_ENV === 'production' },
+            { cB: handleApiReset, text: 'RESET API', type: 'primary' },
         ].map( (button, ind) => {
-            return (
-                <Button
-                    key={ind}
-                    variant={apiStatus && !button.contained ? 'outlined' : 'contained'}
-                    color={apiStatus ? button.type : 'secondary'}
-                    onClick={button.cB}
-                >
-                    {button.text}
-                </Button>
-            )
+            if(button.hide) {
+                console.log('Hiding Button');
+                return null;
+            } else {
+                return (
+                    <Button
+                        key={ind}
+                        variant={apiStatus && !button.contained ? 'outlined' : 'contained'}
+                        color={apiStatus ? button.type : 'secondary'}
+                        onClick={button.cB}
+                    >
+                        {button.text}
+                    </Button>
+                )
+            }
         })
     }
 
