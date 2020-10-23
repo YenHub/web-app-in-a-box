@@ -11,6 +11,8 @@ We have an ExpressJS Web API, using WebSQL for it's data store.
 
 ![demo]
 
+See a [Live Demo of the Test API Here](https://staging-api.east-coast-it.co.uk)!
+
 The front end is React based and there is also a pre-configured phpMyAdmin instance to compliment the setup, all running in an isolated environment in the root of the project!
 
 ## What does it do?
@@ -87,7 +89,7 @@ The React front end is happy to run standalone from it's root `./client`.
 npm start
 ```
 
-**NOTE:** The project will be available at [localhost:3000](localhost:3000) when running standalone
+**NOTE:** The project will be available at http://localhost:3000/ when running standalone
 
 ### Running API standalone
 
@@ -101,7 +103,7 @@ docker-compose up node-sql
 npm run dev
 ```
 
-You can now access the API on [localhost:9000](localhost:9000)
+You can now access the API on http://localhost:9000
 
 ### Running the front or back end standalone:
 
@@ -205,3 +207,8 @@ The MySQL instance is volume bound to: `./docker-volumes` and is also in `.gitig
 
 [demo]: ./web-app.png
 
+## FAQs
+
+### Localhost keeps redirecting to https://
+
+This can be annoying, simply visit chrome://net-internals#hsts and delete "localhost" by entering it into the delete field at the bottom
