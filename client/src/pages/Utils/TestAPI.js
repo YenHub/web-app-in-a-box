@@ -26,7 +26,7 @@ const log = (msg) => {
     console.log(`[TestAPI] ${msg}`);
 }
 
-const APIuri = process.env.REACT_APP_ENV === 'development' ? process.env.REACT_APP_API_DEV : process.env.REACT_APP_API;
+const APIuri = process.env.NODE_ENV === 'production' ? process.env.REACT_APP_API : process.env.REACT_APP_API_DEV;
 
 function TestAPI() {
 
@@ -102,7 +102,6 @@ function TestAPI() {
     function handleApiCall(_timeout = 500) {
         return createAPICall()
             .then( async ( res ) => {
-                console.log(res);
                 if (res.status !== 200) {
                     setAPIStatus(0);
                     return false;
@@ -156,11 +155,11 @@ function TestAPI() {
 
         return [
             { cB: handleApiCall, text: 'CALL API', type: 'default', contained: true },
-            { cB: spamApiCall, text: 'SPAM API', type: 'secondary', hide: process.env.REACT_APP_ENV === 'production' },
+            { cB: spamApiCall, text: 'SPAM API', type: 'secondary', hide: process.env.NODE_ENV === 'production' },
             { cB: handleApiReset, text: 'RESET API', type: 'primary' },
         ].map( (button, ind) => {
             if(button.hide) {
-                console.log('Hiding Button');
+                console.log(process.env.NODE_ENV);
                 return null;
             } else {
                 return (
