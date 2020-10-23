@@ -18,4 +18,4 @@ ReactDOM.render(
 );
 
 // unregister() <> register() to toggle Service Workers
-serviceWorker.register();
+serviceWorker.unregister();
