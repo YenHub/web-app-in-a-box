@@ -49,6 +49,7 @@ function TestAPI() {
     useEffect(() => {
 
         log('Calling the API');
+        log(APIuri);
 
         setTimeout( () => {
             return Promise.all([
