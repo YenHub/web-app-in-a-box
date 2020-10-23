@@ -1,6 +1,6 @@
 {
-  "short_name": "React App",
-  "name": "Create React App Sample",
+  "short_name": "Web-App-In-A-Box",
+  "name": "Web-App-In-A-Box | ReactJS:ExpressJS:MySQL",
   "icons": [
       {
           "src": "/android-chrome-192x192.png",
