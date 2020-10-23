@@ -160,7 +160,6 @@ function TestAPI() {
             { cB: handleApiReset, text: 'RESET API', type: 'primary' },
         ].map( (button, ind) => {
             if(button.hide) {
-                console.log(process.env.NODE_ENV);
                 return null;
             } else {
                 return (
