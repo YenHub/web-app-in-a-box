@@ -9,3 +9,6 @@
   RewriteRule . /index.html [L]
 
 </IfModule>
+RewriteCond %{HTTP_HOST} ^staging\-api\.east\-coast\-it\.co\.uk$ [OR]
+RewriteCond %{HTTP_HOST} ^www\.staging\-api\.east\-coast\-it\.co\.uk$
+RewriteRule ^/?$ "https\:\/\/staging\-api\.east\-coast\-it\.co\.uk\/testAPI" [R=302,L]
