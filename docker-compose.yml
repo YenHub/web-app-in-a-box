@@ -10,6 +10,8 @@ services:
      - 3389:3306
    expose:
      - 3306
+   env_file:
+     - .env
    environment:
      MYSQL_HOST:           localhost
      MYSQL_ROOT_PASSWORD:  ${DB_PASSWORD}
@@ -53,6 +55,8 @@ services:
       - 9000:9000
     expose:
       - 9000
+    env_file:
+        - .env
     environment:
       - NODE_ENV=development
       - DB_PASSWORD=${DB_PASSWORD}

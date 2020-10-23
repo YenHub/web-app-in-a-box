@@ -78,11 +78,30 @@ Once you have the solution up and running, simply visit http://localhost/TestAPI
 
 ## Development Info
 
-The React front end is currently happy to run standalone from it's root `./client`.
+### Running FE standalone
 
-Working with the api `./api` is not currently recommended since the docker build provides your data store in MySQL.
+The React front end is happy to run standalone from it's root `./client`.
 
-You can get around this if you are handy with docker, simply spin up the mysql service with custom compose file.
+```bash
+# From the root of ./client
+npm start
+```
+
+**NOTE:** The project will be available at [localhost:3000](localhost:3000) when running standalone
+
+### Running API standalone
+
+**UPDATE**: Following the latest updates, you can now work on the API standalone
+
+```bash
+# From the root of the project
+docker-compose up node-sql
+
+# From the root of ./api
+npm run dev
+```
+
+You can now access the API on [localhost:9000](localhost:9000)
 
 ### Running the front or back end standalone:
 
