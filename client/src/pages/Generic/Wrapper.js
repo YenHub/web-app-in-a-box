@@ -6,7 +6,7 @@ function Wrapper(app) {
 
     return (
         <div className="App">
-            <Snowfall />
+            <Snowfall snowflakeCount={75} />
             <div className="App-header">
                 {app}
             </div>
