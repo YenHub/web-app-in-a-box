@@ -10,11 +10,11 @@ import 'fontsource-roboto';
 
 // See: https://stackoverflow.com/questions/61706431/react-useeffect-is-being-calling-twice
 ReactDOM.render(
-  <ThemeProvider theme={MUITheme}>
-    <CssBaseline />
-    <App />
-  </ThemeProvider>,
-  document.querySelector('#root'),
+    <ThemeProvider theme={MUITheme}>
+        <CssBaseline />
+        <App />
+    </ThemeProvider>,
+    document.querySelector('#root'),
 );
 
 // unregister() <> register() to toggle Service Workers

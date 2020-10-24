@@ -8,17 +8,17 @@ import CircularProgress from '@material-ui/core/CircularProgress';
 import { makeStyles } from '@material-ui/core/styles';
 
 const useStyles = makeStyles((theme) => ({
-  root: {
-    '& > *': {
-      margin: theme.spacing(1),
+    root: {
+        '& > *': {
+            margin: theme.spacing(1),
+        },
     },
-  },
-  success: {
-      backgroundColor: '#00ff00',
-  },
-  btnFix: {
-      minWidth: '3em',
-  }
+    success: {
+        backgroundColor: '#00ff00',
+    },
+    btnFix: {
+        minWidth: '3em',
+    }
 }));
 
 
@@ -33,7 +33,7 @@ function TestAPI() {
     const classes = useStyles();
 
     const [apiResult, setApiResult] = useState('Attempting to call API ...');
-    const [payloadResult, setPayloadResult] = useState({status: 'No API Results Yet'});
+    const [payloadResult, setPayloadResult] = useState({ status: 'No API Results Yet' });
     const [apiStatus, setAPIStatus] = useState('Processing');
 
     const APIStatus = {
@@ -42,7 +42,7 @@ function TestAPI() {
         2: 'Processing'
     };
 
-    const createAPICall =  () => fetch(`${APIuri}/testAPI`);
+    const createAPICall = () => fetch(`${APIuri}/testAPI`);
     const apiPayloadTest = () => fetch(`${APIuri}/testAPI/payload`);
     const resetAPI = () => fetch(`${APIuri}/testAPI/reset`);
 
@@ -51,58 +51,58 @@ function TestAPI() {
         log('Calling the API');
         log(APIuri);
 
-        setTimeout( () => {
+        setTimeout(() => {
             return Promise.all([
-                createAPICall(),
-                apiPayloadTest()
-            ]).then(async ([testAPI, payLoad]) => {
-                log('API Call successful, setting state');
-                const TestAPI = await testAPI.text();
-                const PayLoad = await payLoad.json();
-                return [TestAPI, PayLoad];
-            })
-            .then(([testAPI, payLoad]) => {
-                setApiResult(testAPI);
-                setPayloadResult(payLoad);
-                setAPIStatus(APIStatus[1]);
-                log(testAPI);
-                log(payLoad.status);
-                window.apiPayload = JSON.stringify(payLoad);
-            }).catch(err => {
-                log('API CALL HAS FAILED');
-                setPayloadResult({status: 'THE API IS A ☕ POT'});
-                setApiResult('FETCH FAILED');
-                setAPIStatus(0);
-            });
+                    createAPICall(),
+                    apiPayloadTest()
+                ]).then(async ([testAPI, payLoad]) => {
+                    log('API Call successful, setting state');
+                    const TestAPI = await testAPI.text();
+                    const PayLoad = await payLoad.json();
+                    return [TestAPI, PayLoad];
+                })
+                .then(([testAPI, payLoad]) => {
+                    setApiResult(testAPI);
+                    setPayloadResult(payLoad);
+                    setAPIStatus(APIStatus[1]);
+                    log(testAPI);
+                    log(payLoad.status);
+                    window.apiPayload = JSON.stringify(payLoad);
+                }).catch(err => {
+                    log('API CALL HAS FAILED');
+                    setPayloadResult({ status: 'THE API IS A ☕ POT' });
+                    setApiResult('FETCH FAILED');
+                    setAPIStatus(0);
+                });
         }, 250)
 
-    // eslint-disable-next-line
+        // eslint-disable-next-line
     }, []); // << DON'T FORGET TO NO DEPS IF YOU DON'T WANT TO SPAM IT...!
 
     // Utils
     function getClasses() {
 
         return classNames('App-logo', {
-            spin: payloadResult.status === 'THE API IS NOT A TEAPOT ☕'  ? true : false,
+            spin: payloadResult.status === 'THE API IS NOT A TEAPOT ☕' ? true : false,
         })
     }
 
     // API Utils
     const handleApiReset = () => {
-            resetAPI().then( (res) => {
-                console.log(res);
-                if (res.status !== 200) {
-                    setAPIStatus(0);
-                    return false;
-                };
-                setAPIStatus(APIStatus[1]);
-                setApiResult(`0 Successful API Calls`);
-            }).catch( () => setAPIStatus(0) );
+        resetAPI().then((res) => {
+            console.log(res);
+            if (res.status !== 200) {
+                setAPIStatus(0);
+                return false;
+            };
+            setAPIStatus(APIStatus[1]);
+            setApiResult(`0 Successful API Calls`);
+        }).catch(() => setAPIStatus(0));
     }
 
     function handleApiCall(_timeout = 500) {
         return createAPICall()
-            .then( async ( res ) => {
+            .then(async (res) => {
                 if (res.status !== 200) {
                     setAPIStatus(0);
                     return false;
@@ -110,38 +110,38 @@ function TestAPI() {
                 const apiResult = await res.text();
                 setApiResult(apiResult);
             })
-            .then( () => setAPIStatus(APIStatus[1]) )
-            .catch( () => setAPIStatus(0) );
+            .then(() => setAPIStatus(APIStatus[1]))
+            .catch(() => setAPIStatus(0));
     }
 
     let spamCalls = 0;
 
     function onlineCheck(promise) {
-      return new Promise(function(resolve, reject) {
-        const timeout = setTimeout(function() {
-            reject(setAPIStatus(0));
-        }, 3000);
-        fetch(`${APIuri}`)
-            .then( (res) => {
-                if(res.status !== 403) {
-                    return;
-                }
-                clearTimeout(timeout);
-                resolve(setAPIStatus(APIStatus[1]));
-            })
-            .catch( () => reject(setAPIStatus(0)));
-      })
+        return new Promise(function(resolve, reject) {
+            const timeout = setTimeout(function() {
+                reject(setAPIStatus(0));
+            }, 3000);
+            fetch(`${APIuri}`)
+                .then((res) => {
+                    if (res.status !== 403) {
+                        return;
+                    }
+                    clearTimeout(timeout);
+                    resolve(setAPIStatus(APIStatus[1]));
+                })
+                .catch(() => reject(setAPIStatus(0)));
+        })
     }
 
     async function spamApiCall() {
-        if(spamCalls === 0) {
+        if (spamCalls === 0) {
             createAPICall();
             setAPIStatus(APIStatus[2]);
         }
         createAPICall();
         createAPICall();
         createAPICall();
-        if(spamCalls < 165) {
+        if (spamCalls < 165) {
             setTimeout(spamApiCall, 50);
             spamCalls++
         } else {
@@ -158,8 +158,8 @@ function TestAPI() {
             { cB: handleApiCall, text: 'CALL API', type: 'default', contained: true },
             { cB: spamApiCall, text: 'SPAM API', type: 'secondary', hide: process.env.NODE_ENV === 'production' },
             { cB: handleApiReset, text: 'RESET API', type: 'primary' },
-        ].map( (button, ind) => {
-            if(button.hide) {
+        ].map((button, ind) => {
+            if (button.hide) {
                 return null;
             } else {
                 return (
@@ -195,8 +195,8 @@ function TestAPI() {
     }
 
     // Loading Spinner
-    if(apiStatus === APIStatus[2]) {
-        return ( <CircularProgress /> );
+    if (apiStatus === APIStatus[2]) {
+        return (<CircularProgress />);
     }
 
     return (

@@ -13,12 +13,12 @@ function App() {
 
     return Wrapper(
         <Router>
-          <Switch>
-            <Route path="/TestAPI">
-              <TestAPI />
-            </Route>
-          </Switch>
-      </Router>
+            <Switch>
+                <Route path="/TestAPI">
+                    <TestAPI />
+                </Route>
+            </Switch>
+        </Router>
     );
 }
 
