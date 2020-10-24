@@ -7,7 +7,7 @@
 
 This is essentially a Web App in a box, front and back end, built with the magic of Docker 🐳
 
-We have an ExpressJS Web API, using WebSQL for it's data store.
+We have an ExpressJS Web API, using MySQL for it's data store.
 
 ![demo]
 
