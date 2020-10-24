@@ -21,6 +21,7 @@ const useStyles = makeStyles((theme) => ({
     }
 }));
 
+const numberWithCommas = (x) => x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
 
 const log = (msg) => {
     console.log(`[TestAPI] ${msg}`);
@@ -49,7 +50,7 @@ function TestAPI() {
     useEffect(() => {
 
         log('Calling the API');
-        log(APIuri);
+        log(`API Uri: ${APIuri}`);
 
         setTimeout(() => {
             return Promise.all([
@@ -62,7 +63,7 @@ function TestAPI() {
                     return [TestAPI, PayLoad];
                 })
                 .then(([testAPI, payLoad]) => {
-                    setApiResult(testAPI);
+                    setApiResult(numberWithCommas(testAPI));
                     setPayloadResult(payLoad);
                     setAPIStatus(APIStatus[1]);
                     log(testAPI);
@@ -108,7 +109,7 @@ function TestAPI() {
                     return false;
                 };
                 const apiResult = await res.text();
-                setApiResult(apiResult);
+                setApiResult(numberWithCommas(apiResult));
             })
             .then(() => setAPIStatus(APIStatus[1]))
             .catch(() => setAPIStatus(0));
