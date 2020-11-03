@@ -5,15 +5,18 @@ import {
     Switch,
     Route
 } from 'react-router-dom';
-import Wrapper from './pages/Generic/Wrapper';
+import Wrapper from './views/Generic/Wrapper';
 
-import TestAPI from './pages/Utils/TestAPI'
+import TestAPI from './views/Utils/TestAPI';
 
 function App() {
 
     return Wrapper(
         <Router>
             <Switch>
+                <Route path="/">
+                    <TestAPI />
+                </Route>
                 <Route path="/TestAPI">
                     <TestAPI />
                 </Route>
