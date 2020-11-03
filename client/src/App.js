@@ -8,16 +8,17 @@ import {
 import Wrapper from './views/Generic/Wrapper';
 
 import TestAPI from './views/Utils/TestAPI';
+import Lander from './views/Lander';
 
 function App() {
 
     return Wrapper(
         <Router>
             <Switch>
-                <Route path="/">
-                    <TestAPI />
+                <Route exact path="/">
+                    <Lander />
                 </Route>
-                <Route path="/TestAPI">
+                <Route exact path="/TestAPI">
                     <TestAPI />
                 </Route>
             </Switch>
