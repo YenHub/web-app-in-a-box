@@ -1,6 +1,10 @@
 import React from 'react';
+import Logger from '../services/Logger';
+const logger = new Logger('[Lander]');
 
-function TestAPI() {
+function Lander() {
+
+    logger.log(`All systems are go 🚀`);
 
     return (
         <div>
@@ -9,4 +13,4 @@ function TestAPI() {
     );
 }
 
-export default TestAPI;
+export default Lander;
