@@ -2,10 +2,14 @@ import React, { useState, useEffect } from 'react';
 import teapot from '../../assets/tea-pot.svg';
 import robot from '../../assets/robot.svg';
 import classNames from 'classnames';
+import Logger from '../../services/Logger';
+import { numberWithCommas } from '../../tools/Formatter';
 
 import Button from '@material-ui/core/Button';
 import CircularProgress from '@material-ui/core/CircularProgress';
 import { makeStyles } from '@material-ui/core/styles';
+
+const logger = new Logger('[TestAPI]');
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -20,12 +24,6 @@ const useStyles = makeStyles((theme) => ({
         minWidth: '3em',
     }
 }));
-
-const numberWithCommas = (x) => x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
-
-const log = (msg) => {
-    console.log(`[TestAPI] ${msg}`);
-}
 
 const APIuri = process.env.NODE_ENV === 'production' ? process.env.REACT_APP_API : process.env.REACT_APP_API_DEV;
 
@@ -49,15 +47,15 @@ function TestAPI() {
 
     useEffect(() => {
 
-        log('Calling the API');
-        log(`API Uri: ${APIuri}`);
+        logger.log('Calling the API');
+        logger.log(`API Uri: ${APIuri}`);
 
         setTimeout(() => {
             return Promise.all([
                     createAPICall(),
                     apiPayloadTest()
                 ]).then(async ([testAPI, payLoad]) => {
-                    log('API Call successful, setting state');
+                    logger.log('API Call successful, setting state');
                     const TestAPI = await testAPI.text();
                     const PayLoad = await payLoad.json();
                     return [TestAPI, PayLoad];
@@ -66,11 +64,11 @@ function TestAPI() {
                     setApiResult(numberWithCommas(testAPI));
                     setPayloadResult(payLoad);
                     setAPIStatus(APIStatus[1]);
-                    log(testAPI);
-                    log(payLoad.status);
+                    logger.log(testAPI);
+                    logger.log(payLoad.status);
                     window.apiPayload = JSON.stringify(payLoad);
                 }).catch(err => {
-                    log('API CALL HAS FAILED');
+                    logger.log('API CALL HAS FAILED');
                     setPayloadResult({ status: 'THE API IS A ☕ POT' });
                     setApiResult('FETCH FAILED');
                     setAPIStatus(0);
@@ -85,7 +83,7 @@ function TestAPI() {
 
         return classNames('App-logo', {
             spin: payloadResult.status === 'THE API IS NOT A TEAPOT ☕' ? true : false,
-        })
+        });
     }
 
     // API Utils
@@ -99,7 +97,7 @@ function TestAPI() {
             setAPIStatus(APIStatus[1]);
             setApiResult(`0 Successful API Calls`);
         }).catch(() => setAPIStatus(0));
-    }
+    };
 
     function handleApiCall(_timeout = 500) {
         return createAPICall()
@@ -172,14 +170,14 @@ function TestAPI() {
                     >
                         {button.text}
                     </Button>
-                )
+                );
             }
-        })
+        });
     }
 
     function getStatusText() {
 
-        return `API STATUS: ${apiStatus ? apiResult : 'THE API IS A ☕ POT'}`
+        return `API STATUS: ${apiStatus ? apiResult : 'THE API IS A ☕ POT'}`;
     }
 
     function showTeapot() {
@@ -192,7 +190,7 @@ function TestAPI() {
 
         return (
             <img src={apiStatus ? robot : teapot } className={getClasses()} alt="logo" />
-        )
+        );
     }
 
     // Loading Spinner
