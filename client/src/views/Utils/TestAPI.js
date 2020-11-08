@@ -113,8 +113,6 @@ function TestAPI() {
             .catch(() => setAPIStatus(0));
     }
 
-    let spamCalls = 0;
-
     function onlineCheck(promise) {
         return new Promise(function(resolve, reject) {
             const timeout = setTimeout(function() {
@@ -132,31 +130,62 @@ function TestAPI() {
         })
     }
 
+    var spamCalls = 0;
+
     async function spamApiCall() {
+
         if (spamCalls === 0) {
             createAPICall();
             setAPIStatus(APIStatus[2]);
-        }
-        createAPICall();
-        createAPICall();
-        createAPICall();
-        if (spamCalls < 165) {
-            setTimeout(spamApiCall, 50);
             spamCalls++
+            setTimeout(spamApiCall, 50);
         } else {
-            spamCalls = 0;
-            handleApiCall(0);
-            setTimeout(onlineCheck, 1500);
+            createAPICall()
+                .then( () => {
+                    if (spamCalls < 498) {
+                        spamCalls++
+                        setTimeout(spamApiCall, 50);
+                    } else {
+                        spamCalls = 0;
+                        handleApiCall(0);
+                        setTimeout(onlineCheck, 1500);
+                    }
+                });
         }
+
+    };
+
+    async function spamApiCallLive() {
+
+        if (spamCalls === 0) {
+            createAPICall();
+            setAPIStatus(APIStatus[2]);
+            spamCalls++
+            setTimeout(spamApiCallLive, 50);
+        } else {
+            createAPICall()
+                .then( () => {
+                    if (spamCalls < 48) {
+                        spamCalls++
+                        setTimeout(spamApiCallLive, 50);
+                    } else {
+                        spamCalls = 0;
+                        handleApiCall(0);
+                        setTimeout(onlineCheck, 1500);
+                    }
+                });
+        }
+
     };
 
     // UI Helpers
     function mapButtons() {
 
         return [
-            { cB: handleApiCall, text: 'CALL API', type: 'default', contained: true },
-            { cB: spamApiCall, text: 'SPAM API', type: 'secondary', hide: process.env.NODE_ENV === 'production' },
-            { cB: handleApiReset, text: 'RESET API', type: 'primary' },
+            { cB: handleApiCall, text: 'CALL API', type: 'primary'},
+            { cB: handleApiReset, text: 'RESET API', type: 'secondary' },
+            { cB: spamApiCall, text: 'SPAM API', type: 'default', hide: process.env.NODE_ENV === 'production', contained: true },
+            { cB: spamApiCallLive, text: 'TURBO CALL', type: 'default', hide: process.env.NODE_ENV === 'production', contained: true },
         ].map((button, ind) => {
             if (button.hide) {
                 return null;
