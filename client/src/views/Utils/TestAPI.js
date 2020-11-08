@@ -86,11 +86,13 @@ function TestAPI() {
         });
     }
 
+    const successStatus = [200, 201];
+
     // API Utils
     const handleApiReset = () => {
         resetAPI().then((res) => {
             console.log(res);
-            if (res.status !== 200) {
+            if (!successStatus.includes(res.status)) {
                 setAPIStatus(0);
                 return false;
             };
@@ -102,7 +104,7 @@ function TestAPI() {
     function handleApiCall(_timeout = 500) {
         return createAPICall()
             .then(async (res) => {
-                if (res.status !== 200) {
+                if (!successStatus.includes(res.status)) {
                     setAPIStatus(0);
                     return false;
                 };
