@@ -55,3 +55,36 @@ exports.reset = (req, res, next) => {
 exports.testPayload = (req, res, next) => {
     res.json({ status: 'THE API IS NOT A TEAPOT ☕' });
 };
+
+const randomGenerator = () => {
+
+    var randA = (Math.random() * 10) > 1 ?  ( Math.random() * 2e4 ) :  ( Math.random() * 2e2 );
+    var randB = ( Math.random() * randA );
+    var randC = ( ( randA * randB ) * Math.random() );
+
+    return parseInt(randC);
+};
+
+exports.magicalSpam = (req, res, next) => {
+    DBConnector.getConnection((err, con) => {
+        if(err)(handleFailure(err, res));
+        apiLog(`Connected to pool`);
+        let sqlStatement = `CREATE DATABASE IF NOT EXISTS ${APItestDB};
+          USE ${APItestDB};
+          CREATE TABLE IF NOT EXISTS testTable(
+              ID int NOT NULL AUTO_INCREMENT,
+              HitCount int,
+              PRIMARY KEY (ID)
+          );
+          INSERT IGNORE INTO testTable SET ID = 1, HitCount = 1;
+          UPDATE testTable SET HitCount = ${randomGenerator()};
+          SELECT HitCount FROM testTable WHERE ID = 1`;
+        con.query(sqlStatement, function (err, result) {
+            if(err)(handleFailure(err, res));
+            apiLog(`CREATED MAGICAL RANDOM NUMBER OF CALLS 😝`);
+            apiLog(`Total Successful Test API Calls: ${result.slice(-1)[0][0].HitCount} 🎉`);
+            res.status(200).send(`${result.slice(-1)[0][0].HitCount.toString()} Successful API Calls`);
+        });
+        con.release();
+    });
+};
