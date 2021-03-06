@@ -27,8 +27,9 @@ services:
    cap_add:
      - SYS_NICE  # CAP_SYS_NICE
 
-
  web-app:
+    depends_on:
+      - api-app
     container_name:        react-express-web-app
     build:
         context:           ./client
@@ -47,7 +48,7 @@ services:
 
  api-app:
     depends_on:
-     - node-mysql
+      - node-mysql
     container_name:        react-express-web-api
     build:
         context:           ./api
@@ -59,9 +60,9 @@ services:
         - .env
     environment:
       - NODE_ENV=development
-      - DB_PASSWORD=${DB_PASSWORD}
       - DB_DATABASE=${DB_DATABASE}
       - DB_USERNAME=${DB_USERNAME}
+      - DB_PASSWORD=${DB_PASSWORD}
     volumes:
       - ./api:/app
       - /app/node_modules
@@ -70,6 +71,8 @@ services:
       - app-network
 
  phpmyadmin:
+    depends_on:
+      - node-mysql
     image:                 phpmyadmin
     container_name:        phpmyadmin
     environment:
