@@ -15,7 +15,7 @@ const handleFailure = (err, res) => {
     throw err;
 };
 
-const APItestDB = process.env.DB_TEST ? process.env.DB_PREFIX + process.env.DB_TEST : 'testDB';
+const APItestDB = process.env.DB_TEST ? process.env.DB_PREFIX + process.env.DB_TEST : process.env.DB_TEST;
 
 exports.index = (req, res, next) => {
 
@@ -34,7 +34,7 @@ exports.index = (req, res, next) => {
               HitCount int,
               PRIMARY KEY (ID)
           );
-          INSERT IGNORE INTO testTable SET ID = 1, HitCount = 1;
+          INSERT IGNORE INTO testTable SET ID = 1, HitCount = 0;
           UPDATE testTable SET HitCount = HitCount + 1 WHERE ID = 1;
           SELECT HitCount FROM testTable WHERE ID = 1`;
 
